@@ -12,6 +12,7 @@ export CXX="$TOOLCHAIN_DIR/clang/bin/clang++ $FLAGS"
 export CPP="$TOOLCHAIN_DIR/clang/bin/clang $FLAGS -E"
 export LLVMCONFIG=$TOOLCHAIN_DIR/clang/bin/llvm-config
 export LDFLAGS="-Wl,-syslibroot,$CROSS_SYSROOT -Wl,-dead_strip -Wl,-pie"
+export CPPFLAGS="-Werror=format -Werror=format-security -fstack-protector-strong -D_FORTIFY_SOURCE=2"
 export TOOLCHAIN_PREFIX=$CROSS_CCTOOLS_PATH/bin/x86_64-apple-darwin10-
 #TODO: bug 1184202 - would be nice if these could be detected with TOOLCHAIN_PREFIX automatically
 export AR=${TOOLCHAIN_PREFIX}ar
