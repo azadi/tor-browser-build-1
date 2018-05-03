@@ -6,7 +6,7 @@ git_url: https://github.com/arthuredelstein/tor-browser.git
 
 var:
   firefox_platform_version: 60.0
-  firefox_version: '[% c("var/firefox_platform_version") %]esr'
+  firefox_version: '[% c("var/firefox_platform_version") %]'
   torbrowser_branch: 8.0
   torbrowser_update_channel: alpha
   copyright_year: '[% exec("git show -s --format=%ci").remove("-.*") %]'
