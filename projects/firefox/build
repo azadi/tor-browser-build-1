@@ -31,6 +31,12 @@ mkdir -p /var/tmp/build
 #  export SELFRANDO_skip_shuffle=
 #[% END -%]
 
+[% IF c("var/linux") %]
+  mkdir -p /var/tmp/dist
+  tar -C /var/tmp/dist -xf $rootdir/[% c('input_files_by_name/rust') %]
+  export PATH="/var/tmp/dist/rust/bin:$PATH"
+[% END -%]
+
 tar -C /var/tmp/build -xf [% project %]-[% c('version') %].tar.gz
 
 [% IF c("var/osx") %]
