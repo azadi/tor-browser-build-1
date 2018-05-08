@@ -8,6 +8,8 @@ var:
 
 input_files:
   - project: container-image
+  - project: gcc
+    name: gcc
   - project: cmake
     name: cmake
   - URL: 'https://releases.llvm.org/[% c("version") %]/llvm-[% c("version") %].src.tar.xz'
