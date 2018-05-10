@@ -1,9 +1,9 @@
 # vim: filetype=yaml sw=2
 version: 0.2.15.2
-git_url: https://git.torproject.org/tor-launcher.git
-git_hash: '[% c("version") %]'
+git_url: https://git.torproject.org/user/sysrqb/tor-launcher.git
+git_hash: bug25750_1
 gpg_keyring: torbutton.gpg
-tag_gpg_id: 1
+tag_gpg_id: 0
 filename: "[% project %]-[% c('version') %]-[% c('var/build_id') %].xpi"
 var:
   container:
