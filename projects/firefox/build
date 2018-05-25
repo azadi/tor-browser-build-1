@@ -108,17 +108,9 @@ fi
 rm -f configure
 rm -f js/src/configure
 
-cat << EOF >> .mozconfig
-ac_add_options --with-tor-browser-version=[% c("var/torbrowser_version") %]
-ac_add_options --with-distribution-id=org.torproject
-ac_add_options --enable-update-channel=[% c("var/torbrowser_update_channel") %]
-ac_add_options --enable-bundled-fonts
-EOF
-
-./mach configure
+./mach configure "--with-tor-browser-version=[% c("var/torbrowser_version") %] --with-distribution-id=org.torproject --enable-update-channel=[% c("var/torbrowser_update_channel") %] --enable-bundled-fonts"
 ./mach build
 ./mach package
-# make -C obj-* package INNER_MAKE_PACKAGE=true
 
 [% IF c("var/osx") %]
   cp -a obj-macos/dist/firefox/* $distdir
