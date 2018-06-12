@@ -13,6 +13,7 @@ mkdir -p /var/tmp/build
 
 [% IF c("var/windows") -%]
   mingwdir=/var/tmp/dist/mingw-w64
+  mingwlibs=$mingwdir/[% c("arch") %]-w64-mingw32/bin/
   mkdir -p $mingwdir/helpers
 
   cat > $mingwdir/helpers/[% c("arch") %]-w64-mingw32-g++ << 'EOF'
@@ -32,6 +33,23 @@ EOF
 
   chmod +x $mingwdir/helpers/*
   export PATH="$mingwdir/helpers:$PATH"
+[% END -%]
+
+[% IF c("var/windows") %]
+  # Unpack fxc2.
+  mkdir -p /var/tmp/dist
+  tar -C /var/tmp/dist -xf [% c('input_files_by_name/fxc2') %]
+  fxcdir=/var/tmp/dist/fxc2/bin
+  cp $mingwlibs/libwinpthread-1.dll $fxcdir
+  export PATH="$fxcdir:$PATH"
+  # fxc2 requires Wine.
+  [% IF c("var/windows-x86_64") %]
+    export WINEARCH=win64
+  [% END %]
+  export HOME=/var/tmp/home
+  mkdir -p $HOME
+  WINEROOT=$HOME/.wine/drive_c
+  wine wineboot -i &
 [% END -%]
 
 [% IF c("var/linux") %]
@@ -129,7 +147,7 @@ rm -f configure
 rm -f js/src/configure
 
 ./mach configure --with-tor-browser-version=[% c("var/torbrowser_version") %] --with-distribution-id=org.torproject --enable-update-channel=[% c("var/torbrowser_update_channel") %] --enable-bundled-fonts
-./mach build
+[% IF c("var/windows") %]xvfb-run[% END %] ./mach build
 ./mach package
 
 [% IF c("var/osx") %]
