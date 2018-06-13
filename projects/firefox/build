@@ -179,6 +179,8 @@ rm -f js/src/configure
   cp -a obj-*/dist/firefox/* $distdir/Browser/
   cp -a $rootdir/msvcr100.dll $distdir/Browser
   cp -a $gcclibs/libssp-0.dll $distdir/Browser
+  cp -a $fxcdir/d3dcompiler_47.dll $distdir/Browser
+  cp -a $mingwlibs/libwinpthread-1.dll $distdir/Browser
 [% END %]
 
 # Make MAR-based update tools available for use during the bundle phase.
@@ -234,6 +236,8 @@ cd $distdir
 [% IF c("var/windows") %]
   cp $rootdir/msvcr100.dll Browser/
   cp $gcclibs/libssp-0.dll Browser/
+  cp $fxcdir/d3dcompiler_47.dll Browser/
+  cp $mingwlibs/libwinpthread-1.dll Browser/
 [% END %]
 
 mkdir -p [% dest_dir _ '/' _ c('filename') %]
