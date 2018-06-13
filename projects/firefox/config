@@ -108,6 +108,8 @@ input_files:
     enable: '[% c("var/windows") %]'
   - filename: STL_win64.patch
     enable: '[% c("var/windows-x86_64") %]'
+  - filename: nsis-uninstall.patch
+    enable: '[% c("var/windows") %]'
   - project: rust
     name: rust
     enable: '[% ! c("var/windows-i686") %]'
