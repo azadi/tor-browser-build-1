@@ -66,7 +66,7 @@ EOF
   export SELFRANDO_skip_shuffle=
 [% END -%]
 
-[% IF ! c("var/windows") %]
+[% IF ! c("var/windows-i686") %]
   mkdir -p /var/tmp/dist
   tar -C /var/tmp/dist -xf [% c('input_files_by_name/rust') %]
   export PATH="/var/tmp/dist/rust/bin:$PATH"

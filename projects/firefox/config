@@ -3,7 +3,7 @@ version: '[% c("abbrev") %]'
 filename: 'firefox-[% c("version") %]-[% c("var/osname") %]-[% c("var/build_id") %]'
 git_hash: 'tor-browser-[% c("var/firefox_version") %]-[% c("var/torbrowser_branch") %]-1-build1'
 tag_gpg_id: 1
-git_url: https://git.torproject.org/tor-browser.git
+git_url: https://github.com/azadi/gecko-dev
 gpg_keyring: torbutton.gpg
 
 var:
@@ -28,7 +28,7 @@ targets:
       torbrowser_update_channel: release
 
   nightly:
-    git_hash: 'tor-browser-[% c("var/firefox_version") %]-[% c("var/torbrowser_branch") %]-1'
+    git_hash: be179ca1a0c7812a332b16a4f1b87eb68c629d01
     tag_gpg_id: 0
     var:
       torbrowser_update_channel: default
@@ -110,7 +110,7 @@ input_files:
     enable: '[% c("var/windows-x86_64") %]'
   - project: rust
     name: rust
-    enable: '[% ! c("var/windows") %]'
+    enable: '[% ! c("var/windows-i686") %]'
   - project: llvm
     name: llvm
     enable: '[% c("var/linux") %]'
