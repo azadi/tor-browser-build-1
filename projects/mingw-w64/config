@@ -6,7 +6,6 @@ version: '[% c("abbrev") %]'
 var:
   container:
     use_container: 1
-  gcc_version: 6.4.0
   deps:
     - automake
     - build-essential
