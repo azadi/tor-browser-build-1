@@ -273,6 +273,25 @@ if [ $SYSARCHITECTURE -ne $TORARCHITECTURE ]; then
    exit 1
 fi
 
+bundled_gcc="6.4.0"
+installed_gcc="$(gcc -dumpversion)"
+
+function checkVer {
+    ver="$(printf "$1\n$2" | sort -Vr | head -n1)"
+    if [ "$1" == "$ver" ]; then
+        return 0
+    else
+        return 1
+    fi
+}
+
+if checkVer $installed_gcc $bundled_gcc; then
+    # If the installed version of gcc is more recent then we don't need our
+    # version of libstdc++ and should use the system version instead. See bug
+    # 25485 for more information.
+    rm -f ${HOME}/TorBrowser/Tor/libstdc++.so.6
+fi
+
 LD_LIBRARY_PATH="${HOME}/TorBrowser/Tor/"
 export LD_LIBRARY_PATH
 [% IF ! c("var/release") %]
