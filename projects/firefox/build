@@ -132,6 +132,10 @@ fi
   export CC='gcc -m32'
 [% END -%]
 
+[% IF c("var/linux") %]
+  export LDFLAGS="-Wl,--enable-new-dtags,-rpath,'\$ORIGIN/TorBrowser/Tor'"
+[% END -%]
+
 [% IF c("var/windows") %]
   patch -p1 < $rootdir/nsis-uninstall.patch
   patch -p1 < $rootdir/1464084.patch
